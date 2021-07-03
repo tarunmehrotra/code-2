@@ -1,0 +1,135 @@
+//Doubly circular Linked List
+package DoublyCircularLinkedList;
+
+public class DoublyCc {
+    public static void main(String args[])
+    {
+//        Doubly d=new Doubly();
+//        d.insertAtEnd(1);
+//        d.insertAtEnd(2);
+//        d.insertAtStart(3);
+//        d.insertAtEnd(4);
+//        d.insertAtStart(5);
+//        d.insertAtPos(6,2);
+//        d.show();
+//        System.out.println();
+//        d.deleteAtPos(4);
+//        d.show();
+//        System.out.println();
+//        d.deleteAtLast(4);
+//        d.show();
+//        System.out.println();
+//        d.rev();
+
+    }
+}
+class Node
+{
+    int data;
+    Node next;
+    Node prev;
+}
+class Doubly
+{
+    Node head;
+    Node tail;
+    public void insertAtEnd(int data)
+    {
+        Node node=new Node();
+        node.data=data;
+        node.next=null;
+        node.prev=null;
+        if(head == null)
+        {
+            head=node;
+            tail=node;
+        }
+        else
+        {
+           tail.next=node;
+           node.prev=tail;
+           tail=node;
+           tail.next=head;
+        }
+    }
+    public void insertAtStart(int data)
+    {
+        Node node=new Node();
+        node.data=data;
+        node.next=null;
+        node.prev=null;
+        node.next=head;
+        head.prev=node;
+        head=node;
+    }
+    public void insertAtPos(int data,int index)
+    {
+        Node node=new Node();
+        node.data=data;
+        node.next=null;
+        node.prev=null;
+        if(index ==0)
+        {
+            insertAtStart(data);
+        }
+        else{
+            Node n=head;
+            for(int i=1;i<index-1;i++)
+            {
+                n=n.next;
+            }
+            node.next=n.next;
+            node.prev=n;
+            n.next.prev=node;
+            n.next=node;
+
+        }
+    }
+    public void deleteAtPos(int index){
+
+        if(index == 0)
+        {
+            head=head.next;
+        }
+        Node n=head;
+        Node n1=null;
+        for(int i=0;i<index-1;i++)
+        {
+            n=n.next;
+        }
+        n1=n.next;
+        n.next=n1.next;
+    }
+    public void deleteAtLast(int index)
+    {
+        Node n=head;
+        for(int i=0;i<index-1;i++)
+        {
+            n=n.next;
+        }
+
+        tail=n;
+        tail.next=head;
+
+    }
+    public void rev()
+    {
+        Node n=tail;
+        while(tail.prev != head.prev)
+        {
+            System.out.print(tail.data+" ");
+            tail=tail.prev;
+        }
+        System.out.print(tail.data+" ");
+    }
+    public void show()
+    {
+        Node n=head;
+        while(n != tail)
+        {
+            System.out.print(n.data+" ");
+            n=n.next;
+        }
+        System.out.print(n.data+" ");
+    }
+}
